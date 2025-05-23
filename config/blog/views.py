@@ -29,3 +29,10 @@ def create(request):
         return redirect('detail', new_blog.id)
     return render(request, 'new.html')
 
+# DELETE
+def delete(request, blog_id):
+    blog = get_object_or_404(Blog, pk=blog_id)
+    if request.method == 'POST':
+        blog.delete()
+        return redirect('home')
+    return render(request, 'delete_confirm.html', {'blog': blog})
